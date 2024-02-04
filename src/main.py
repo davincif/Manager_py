@@ -1,9 +1,15 @@
-from engine_layer.engine_layer_text import EngineLayerText
+from engine_layer import EngineLayer
+
+from entites import WorldMap
 
 
 def main():
-    engine = EngineLayerText()
-    engine.initialize_engine()
+    load()
+
+
+def load():
+    EngineLayer.initialize()
+    worldMap = WorldMap()
 
 
 if __name__ == "__main__":

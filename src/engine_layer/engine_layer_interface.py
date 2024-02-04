@@ -1,12 +1,18 @@
 from abc import ABC, abstractmethod
 
+from utils import Singleton
 
-class EngineLayerInterface(ABC):
+
+class EngineLayerInterface(ABC, Singleton):
 
     @abstractmethod
-    def initialize_engine(self):
+    def initialize(self):
         pass
 
     @abstractmethod
-    def finish_engine(self):
+    def finish(self):
+        pass
+
+    @abstractmethod
+    def configLoader(self, addr: str):
         pass

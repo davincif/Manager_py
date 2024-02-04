@@ -1,0 +1,21 @@
+world:
+    size: [200, 200]
+    generation:
+        # seed for the randomization function
+        seed: null
+
+        # the closest to 1, the bigger the biomes tends to be
+        biome_inertia: 0.85
+
+        # to be removed from the biome_inertia on every iteration
+        heat_loss: 0.05
+        # to be readed to the biome_inertia on every similar biome close to the current
+        # being generated
+        reheat_per_contiguos_title: 0.008
+        # machiming value for reheating
+        reheat_cap: 0.02
+        # ignores the first 'x' neighboorn similar cell before applying reheat
+        reheat_ignore_neighborn_threshold: 1
+
+        # are the biomes on the diagonal considered in the calculations?
+        conside_biome_on_diagonal: true

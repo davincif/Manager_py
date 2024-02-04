@@ -6,9 +6,7 @@ Where RTS games meets Tycoons: **Manager_py** is born.
 
 ## GDD
 
-Game Design Document.
-
-see [here](./docs/GDD.md)
+Game Design Document with project specifications [here](./docs/GDD.md).
 
 ## The Author
 
@@ -27,3 +25,11 @@ see [here](./docs/GDD.md)
 </div>
 
 davincif@davincif.com 📧
+
+## License
+
+This software is licensed under the [Zlib](https://www.zlib.net/zlib_license.html) license.
+
+In short words it just as free as MIT License, but you: must not claim that you wrote the original software; and, if you made any change, mention it.
+
+That's all, enjoy =)
