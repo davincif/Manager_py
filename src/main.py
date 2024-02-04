@@ -1,6 +1,6 @@
 from engine_layer import EngineLayer
 
-from entites import WorldMap
+from entites.world_map import WorldMap
 
 
 def main():

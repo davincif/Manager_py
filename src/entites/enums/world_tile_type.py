@@ -2,7 +2,8 @@ from enum import Enum, auto
 
 
 class WorldTitleType(Enum):
-    GRASS = 1
+    NONE = 0
+    GRASS = auto()
     WATER = auto()
     FOREST = auto()
     MOUNTAINS = auto()

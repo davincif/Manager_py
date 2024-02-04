@@ -3,7 +3,7 @@ from .enums.world_tile_type import WorldTitleType
 from .world_conf import WorldConf
 from .world_tile import WorldTile
 
-type heat_mash = dict[WorldConf, float]
+type heat_mash = dict[WorldTitleType, float]
 type heat_map = list[list[heat_mash]]
 
 
@@ -15,22 +15,23 @@ class WorldMap:
         self.conf = WorldConf()
         self.conf.load()
 
-        update_seed(self.conf.generation__seed)
+        update_seed(self.conf.generation.seed)
         self.__generate()
 
     def __generate(self):
-        self.map = self.__allocate_empty_map()
+        self.map = self.__create_empty_map()
 
         self._generate_biomes()
 
-    def __allocate_empty_map(self):
+    def __create_empty_map(self):
         new_map: list[list[WorldTile]] = []
 
         for i in range(self.conf.world_size_y):
             new_map.append([])
 
-            for _ in range(self.conf.world_size_x):
-                new_map[i].append(WorldTile())
+            for j in range(self.conf.world_size_x):
+                title = WorldTile((i, j))
+                new_map[i].append(title)
 
         return new_map
 
@@ -48,15 +49,26 @@ class WorldMap:
             for j in range(self.conf.world_size_x):
                 if i == 0 and j == 0:
                     heatmap.append(
-                        [{self.map[0][0].type: self.conf.generation__biome_inertia}]
+                        [{self.map[0][0].type: self.conf.generation.biome_inertia}]
                     )
                 else:
-                    current_heatmash = self.__calculate_heat_mash(
+                    current_heatmap = self.__calculate_heat_mash(
                         cell=(i, j),
                         heatmap=heatmap,
-                        consider_diagonal=self.conf.generation__conside_biome_on_diagonal,
+                        consider_diagonal=self.conf.generation.conside_biome_on_diagonal,
                     )
-                    heatmap[i].append(current_heatmash)
+                    heatmap[i].append(current_heatmap)
+                    self.__add_title_change_chances_to_heatmash(current_heatmap)
+
+                    new_biome = choose_from(
+                        list(current_heatmap.keys()), list(current_heatmap.values())
+                    )
+
+                    self.map[i][j].set_biome(new_biome, self.conf.global_terrains)
+
+    def __add_title_change_chances_to_heatmash(self, heatmashes: heat_mash):
+        biggest_probability = max(heatmashes.values())
+        heatmashes[WorldTitleType.NONE] = 1 - biggest_probability
 
     def __calculate_heat_mash(
         self, cell: tuple[int, int], heatmap: heat_map, consider_diagonal: bool
@@ -88,10 +100,10 @@ class WorldMap:
             cooled_down_heatmashs.append(heatmash)
             biomes_to_remove = []
             for biome in heatmash:
-                if heatmash[biome] <= self.conf.generation__heat_loss:
+                if heatmash[biome] <= self.conf.generation.heat_loss:
                     biomes_to_remove.append(biome)
                 else:
-                    heatmash[biome] -= self.conf.generation__heat_loss
+                    heatmash[biome] -= self.conf.generation.heat_loss
             for biome in biomes_to_remove:
                 del heatmash[biome]
 
@@ -115,11 +127,11 @@ class WorldMap:
             reheat_intensity = min(
                 max(
                     similar_titles
-                    - self.conf.generation__reheat_ignore_neighborn_threshold,
+                    - self.conf.generation.reheat_ignore_neighborn_threshold,
                     0,
                 )
-                * self.conf.generation__reheat_per_contiguos_title,
-                self.conf.generation__reheat_cap,
+                * self.conf.generation.reheat_per_contiguos_title,
+                self.conf.generation.reheat_cap,
             )
             average_heat_map[biome] = (
                 sum(all_heats[biome]) / similar_titles + reheat_intensity

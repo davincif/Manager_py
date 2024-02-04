@@ -28,3 +28,4 @@ ignore-paths=./venv
 disable=
     consider-using-dict-items,
     missing-docstring,
+    dangerous-default-value,

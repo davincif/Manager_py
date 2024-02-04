@@ -19,3 +19,24 @@ world:
 
         # are the biomes on the diagonal considered in the calculations?
         conside_biome_on_diagonal: true
+    global_terrains:
+        GRASS:
+            is_constructable: true
+            symbol: '"~"'
+            graphic_symbol: 🌱
+            font_color: "#78be2c"
+        WATER:
+            is_constructable: false
+            symbol: "(~)"
+            graphic_symbol: 🌊
+            font_color: "#00a6ed"
+        FOREST:
+            is_constructable: true
+            symbol: "/|\\"
+            graphic_symbol: 🌲
+            font_color: "#3e811b"
+        MOUNTAINS:
+            is_constructable: false
+            symbol: "/\\"
+            graphic_symbol: 🗻
+            font_color: "#2f1b3c"
