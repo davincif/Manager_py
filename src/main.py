@@ -1,23 +1,9 @@
-from colorama import just_fix_windows_console, init as colorama_init
-from os import system
-
-GAME_NAME = "GAME_NAME"
+from engine_layer.engine_layer_text import EngineLayerText
 
 
 def main():
-    load()
-
-
-def load():
-    print("loading...")
-
-    # initing colorama
-    just_fix_windows_console()
-    colorama_init()
-
-    # finishing loading
-    system("clear")
-    print("game started!", end="\n\n")
+    engine = EngineLayerText()
+    engine.initialize_engine()
 
 
 if __name__ == "__main__":
