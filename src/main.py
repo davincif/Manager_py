@@ -10,6 +10,7 @@ def main():
 def load():
     EngineLayer.initialize()
     worldMap = WorldMap()
+    print(worldMap)
 
 
 if __name__ == "__main__":
