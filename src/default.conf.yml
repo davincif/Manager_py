@@ -1,5 +1,5 @@
 world:
-    size: [200, 200]
+    size: [20, 20]
     generation:
         # seed for the randomization function
         seed: null
@@ -19,6 +19,9 @@ world:
 
         # are the biomes on the diagonal considered in the calculations?
         conside_biome_on_diagonal: true
+    terrains_config:
+        # this property has no effect yet
+        tile_size: 3
     global_terrains:
         GRASS:
             is_constructable: true

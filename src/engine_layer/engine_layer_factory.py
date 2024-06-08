@@ -1,13 +1,14 @@
-from .engine_layer_interface import EngineLayerInterface
-from .engine_layer_text import EngineLayerText
-from utils import Factory
+from .engine_layer_interface import CameraFrameInterface, EngineLayerInterface, Point
+from .engine_layer_text import CameraFrameText, EngineLayerText, SurfaceText
 
 
-class __EngineLayerFactory(Factory):
-    def create(self, **kwargs) -> EngineLayerInterface:
-        return EngineLayerText()
+def factory_engine_layer() -> EngineLayerInterface:
+    return EngineLayerText()
 
 
-EngineLayerFactory = __EngineLayerFactory()
+def factory_surface(size: tuple[int, int]) -> EngineLayerInterface:
+    return SurfaceText(size)
 
-__all__ = ["EngineLayerFactory"]
+
+def factory_camera_frame(upper_left: Point, size: Point) -> CameraFrameInterface:
+    return CameraFrameText(upper_left, size)

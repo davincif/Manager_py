@@ -1,4 +1,4 @@
-from engine_layer import EngineLayer
+from engine_layer.engine_layer_interface import EngineConfigurations
 
 
 class _GlobalTerrainsProps:
@@ -44,14 +44,12 @@ class WorldConf:
         self.generation = _Generation()
         self.global_terrains = _GlobalTerrains()
 
-    def load(self, conf_file="src/default.conf.yml"):
+    def load(self, conf: EngineConfigurations):
         """Loads all the customization for the world generation in the configuration file.
 
         Args:
             conf_file: where the configuration file is.
         """
-        conf = EngineLayer.configLoader(conf_file)
-
         [self.world_size_x, self.world_size_y] = conf["world"]["size"]
 
         ## Generation settings

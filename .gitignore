@@ -48,3 +48,6 @@ __pypackages__/
 
 # linter
 .idea/
+
+# custom
+.trash/

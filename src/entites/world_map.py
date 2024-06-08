@@ -1,4 +1,6 @@
+from engine_layer.engine_layer_interface import EngineConfigurations
 from utils.luky import choose_from, update_seed
+
 from .enums.world_tile_type import WorldTitleType
 from .world_conf import WorldConf
 from .world_tile import WorldTile
@@ -11,11 +13,12 @@ class WorldMap:
     map: list[list[WorldTile]]
     conf: WorldConf
 
-    def __init__(self) -> None:
+    def __init__(self, conf: EngineConfigurations) -> None:
         self.conf = WorldConf()
-        self.conf.load()
+        self.conf.load(conf)
 
         update_seed(self.conf.generation.seed)
+
         self.__generate()
 
     def __generate(self):
