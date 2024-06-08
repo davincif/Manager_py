@@ -5,7 +5,10 @@ from engine_layer.engine_layer_factory import (
     factory_engine_layer,
     factory_surface,
 )
-from engine_layer.engine_layer_interface import EngineLayerInterface, SurfaceInterface
+from engine_layer.interfaces.engine_layer_interface import (
+    EngineLayerInterface,
+)
+from engine_layer.interfaces.surface_interface import SurfaceInterface
 from entites.world_map import WorldMap
 
 engine_layer: EngineLayerInterface
